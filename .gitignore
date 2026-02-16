@@ -8,6 +8,10 @@
 # Exceto estes arquivos/extensões:
 !.gitignore
 !*.py
+!*.cs
+!*.csproj
+!*.sln
+!*.csx
 !README
 !README.*
 
@@ -20,3 +24,10 @@ __pycache__/
 env/
 venv/
 .env
+
+# Pastas típicas de projetos C# (bin, obj, etc)
+bin/
+obj/
+*.user
+*.suo
+.vs/
