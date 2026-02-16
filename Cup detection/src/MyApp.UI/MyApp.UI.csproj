@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MyApp.Common\MyApp.Common.csproj" />
+    <ProjectReference Include="..\MyApp.Services\MyApp.Services.csproj" />
+  </ItemGroup>
+</Project>

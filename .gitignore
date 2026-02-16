@@ -5,6 +5,9 @@
 # Ignore tudo por padrão
 *
 
+# Permite pastas (necessário para que arquivos dentro delas sejam rastreados)
+!*/
+
 # Exceto estes arquivos/extensões:
 !.gitignore
 !*.py
@@ -31,3 +34,12 @@ obj/
 *.user
 *.suo
 .vs/
+
+# Garante que essas pastas específicas sejam ignoradas mesmo após !*/
+**/bin/
+**/obj/
+**/.vs/
+**/__pycache__/
+**/.venv/
+**/env/
+**/venv/
