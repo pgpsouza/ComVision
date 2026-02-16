@@ -21,4 +21,22 @@ public class RelayCommand : ICommand
     public void Execute(object? parameter) => _execute();
 
     public void RaiseCanExecuteChanged() => CanExecuteChanged?.Invoke(this, EventArgs.Empty);
+    public void RaiseCanExecuteChangedOnUI()
+    {
+        try
+        {
+            var app = System.Windows.Application.Current;
+            if (app != null)
+            {
+                app.Dispatcher.Invoke(() => CanExecuteChanged?.Invoke(this, EventArgs.Empty));
+                return;
+            }
+        }
+        catch
+        {
+            // ignore and fall back to direct invoke
+        }
+
+        CanExecuteChanged?.Invoke(this, EventArgs.Empty);
+    }
 }

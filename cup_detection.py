@@ -1,21 +1,43 @@
 import os
+import sys
 import time
 from datetime import datetime
 
 import cv2
 from ultralytics import YOLO
 
+
+def get_camera_index_from_args() -> int:
+    """
+    Lê o índice da câmera a partir dos argumentos da linha de comando.
+    Uso:
+        python cup_detection.py          -> usa câmera 0 (padrão)
+        python cup_detection.py 1        -> usa câmera 1
+    """
+    if len(sys.argv) >= 2:
+        try:
+            return int(sys.argv[1])
+        except ValueError:
+            print(
+                f"Índice de câmera inválido: {sys.argv[1]!r}. "
+                "Usando câmera 0 como padrão."
+            )
+            return 0
+    return 0
+
+
 # 1. Carrega o modelo pré-treinado
 # O 'yolov8n.pt' é a versão Nano (mais leve e rápida).
 # Ele será baixado automaticamente na primeira execução.
 model = YOLO("yolov8n.pt")
 
-# 2. Inicia a captura de vídeo (0 geralmente é a webcam integrada)
-cap = cv2.VideoCapture(0)
+# 2. Inicia a captura de vídeo
+camera_index = get_camera_index_from_args()
+cap = cv2.VideoCapture(camera_index)
 
 # Verifica se a câmera abriu
 if not cap.isOpened():
-    print("Erro ao acessar a webcam.")
+    print(f"Erro ao acessar a câmera com índice {camera_index}.")
     exit()
 
 print("Pressione 'q' para sair.")
